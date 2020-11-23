@@ -1,5 +1,8 @@
-<?php include 'templates/header.php'; ?>
+<?php
 
+	require('database/db.php');
 
-
-<?php include 'templates/footer.php'; ?>
+	$db = new DB;
+	
+	if (!$db->isLogged()) header('Location: login.php');
+	else header('Location: me.php');
