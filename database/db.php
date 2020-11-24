@@ -29,6 +29,7 @@ class DB {
 		if ($usersTable === false) {
 			$this->connect->query('CREATE TABLE `'.$this->usersTable.'` (
 				`id` INT(11) NOT NULL,
+				`mail` VARCHAR(565) NOT NULL,
 				`u_name` VARCHAR(65) NOT NULL,
 				`password` VARCHAR(65) NOT NULL,
 				`f_name` VARCHAR(65) DEFAULT NULL,
@@ -51,7 +52,7 @@ class DB {
 
 		$id = $_COOKIE['id'];
 
-		if ($id !== false && $this->getUser($id) != false) return true;
+		if ($id != NULL && $this->getUser($id) != false) return true;
 
 		return false;
 
@@ -87,12 +88,12 @@ class DB {
 
 		setcookie("id", $id);
 
-		return $this->connect->query('INSERT INTO `'.$this->usersTable.'` VALUES ("'.$id.'","'.$data['u_name'].'","'.$data['password'].'","","","","")');
+		return $this->connect->query('INSERT INTO `'.$this->usersTable.'` VALUES ("'.$id.'","'.$data['mail'].'","'.$data['u_name'].'","'.$data['password'].'","","","","")');
 
 	}
 
 	public function isExists($data) {
-		return $this->connect->query('SELECT * FROM `'.$this->usersTable.'` WHERE u_name = "'.$data['u_name'].'" AND password = "'.$data['password'].'"')->fetch_assoc();
+		return $this->connect->query('SELECT * FROM `'.$this->usersTable.'` WHERE u_name = "'.$data['u_name/mail'].'" AND password = "'.$data['password'].'" OR mail = "'.$data['u_name/mail'].'" AND password = "'.$data['password'].'"')->fetch_assoc();
 	}
 
 	public function sign($data) {
@@ -106,6 +107,16 @@ class DB {
 			return true;
 
 		}
+
+		return false;
+
+	}
+
+	public function logout() {
+
+		setcookie("id", '', time() - 3600);
+
+		if (header('Location: login.php')) return true;
 
 		return false;
 

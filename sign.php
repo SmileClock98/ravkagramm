@@ -13,12 +13,14 @@
 
 		if ($sign == 'in') {
 
-			if ($db->sign(['u_name' => $u_name, 'password' => $password])) header('Location: me.php');
+			if ($db->sign(['u_name/mail' => $u_name, 'password' => $password])) header('Location: me.php');
 			else header('Location: login.php?data=wrong');
 
 		} else if ($sign == 'up') {
 
-			if ($db->addUser(['u_name' => $u_name, 'password' => $password])) header('Location: me.php');
+			$mail = $_POST['mail'];
+
+			if ($db->addUser(['mail' => $mail, 'u_name' => $u_name, 'password' => $password])) header('Location: me.php');
 			else header('Location: register.php?data=wrong');
 
 		}
