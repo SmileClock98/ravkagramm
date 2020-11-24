@@ -153,6 +153,11 @@ iframe {
   text-transform: uppercase;
 }
 
+.step-text {
+  color: #57b846;
+  font-weight: bold;
+}
+
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
@@ -240,6 +245,10 @@ iframe {
   background: #ebebeb;
   border-radius: 27px;
   padding: 0 35px 0 35px;
+}
+
+.input-warning {
+  box-shadow: 0 0 5px red;
 }
 
 

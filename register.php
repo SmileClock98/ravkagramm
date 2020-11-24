@@ -23,6 +23,10 @@
 						Регистрация
 					</span>
 
+					<?php if (isset($_GET['data']) && $_GET['data'] == 'wrong') { ?>
+						<div class="alert alert-danger" align="center">Данные введены неверно!</div>
+					<?php } ?>
+
 					<input type="hidden" name="sign" value="up">
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Пожалуйста, введите очту">
